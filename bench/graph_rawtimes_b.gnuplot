@@ -1,4 +1,4 @@
-set terminal png size 840,630
+set terminal png size 800,630
 set output 'graph_rawtimes_b.png'
 set grid
 set title "Execution time on pointer-and-length strings, less is better"

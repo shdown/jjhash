@@ -85,25 +85,27 @@ static HASH_FUNC_ATTRS uint32_t hash_jj_s(const char *s)
 #define XXX_HASH_S hash_jj_s
 #endif
 
+#define INTERNAL_WL (BENCH_WL + (BENCH_WL < 8 ? 1 : 0))
+
 typedef struct {
 #if BENCH_B
 
-# if BENCH_WL <= 256
-#  define MAX_WORD_LEN (BENCH_WL - 1)
-    char buf[BENCH_WL - 1];
+# if INTERNAL_WL <= 256
+#  define MAX_WORD_LEN (INTERNAL_WL - 1)
+    char buf[INTERNAL_WL - 1];
     uint8_t len;
 
-# elif BENCH_WL <= 65536
-#  define MAX_WORD_LEN (BENCH_WL - 2)
-    char buf[BENCH_WL - 2];
+# elif INTERNAL_WL <= 65536
+#  define MAX_WORD_LEN (INTERNAL_WL - 2)
+    char buf[INTERNAL_WL - 2];
     uint16_t len;
 # else
-#  error "BENCH_WL > 65536 is not supported."
+#  error "Such a big BENCH_WL is not supported."
 # endif
 
 #else
-# define MAX_WORD_LEN (BENCH_WL - 1)
-    char buf[BENCH_WL];
+# define MAX_WORD_LEN (INTERNAL_WL - 1)
+    char buf[INTERNAL_WL];
 #endif
 } Word;
 
@@ -191,7 +193,7 @@ int main()
     Dict D = dict_new(BENCH_NW);
 
     for (int i = 0; i < BENCH_NW; ++i) {
-        static char buf[BENCH_WL];
+        static char buf[MAX_WORD_LEN + 1];
 
         size_t len = gen_word_len_almost_full(MAX_WORD_LEN);
         gen_word(buf, len);
