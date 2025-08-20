@@ -74,6 +74,8 @@ $$
 where `$n$` is the number of words, `$m$` is the number of buckets, `$b_j$` is the number of words in the bucket `$j$`.
 
 We test on the [corpus](http://shdown.github.io/stuff/jjhash/check_quality_corpus.txt.gz) of `W`=146'728 words extracted from the OANC American English language corpus.
+To prevent “overfitting”, we chose `JJ_PRIME` from a large set of prime numbers based on the performance on a smaller dictionary of 27k words;
+this evaluation is thus a “validation”.
 
 For each `i=1...30`, we downsample the corpus to `min(2^i, W)` words (i.e. choose a random subset of this size) and
 map these words into `2^i` buckets with the hash function.
