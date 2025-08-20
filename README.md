@@ -83,7 +83,7 @@ where `$n$` is the number of words, `$m$` is the number of buckets, `$b_j$` is t
 
 Here’s a rendered formula of the above LaTeX code:
 
-![Formula](https://github.com/user-attachments/assets/67b306d7-18be-4f3e-b7ee-7fe16f354a5f)
+![Formula](https://github.com/user-attachments/assets/5bd94dcc-3b1c-4a04-a53d-fb2d504834cc)
 
 We test on the [corpus](http://shdown.github.io/stuff/jjhash/check_quality_corpus.txt.gz) of `W`=146'728 words extracted from the OANC American English language corpus.
 To prevent “overfitting”, we chose `JJ_PRIME` from a large set of prime numbers based on the performance on a smaller dictionary of 27k words;
