@@ -45,7 +45,7 @@ bench_for_n() {
 }
 
 for (( i = 3; i <= 23; ++i )); do
-    j=$(awk_single_expr 'print(int(1.6 ** i))' -v"i=$i")
+    j=$(awk_single_expr 'print(int(1.6 ^ i))' -v"i=$i")
     if (( j % 4 )); then
         (( j = j - (j % 4) + 4 ))
     fi

@@ -232,10 +232,10 @@ void report_stats(Corpus *C, maxcoll_func f, uint64_t prime)
 static void rstrip_nl(char *s)
 {
     size_t ns = strlen(s);
-    if (ns && s[ns - 1] == '\r') {
+    if (ns && s[ns - 1] == '\n') {
         --ns;
     }
-    if (ns && s[ns - 1] == '\n') {
+    if (ns && s[ns - 1] == '\r') {
         --ns;
     }
     s[ns] = '\0';

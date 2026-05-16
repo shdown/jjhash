@@ -9,7 +9,7 @@ do_process() {
     else
         cond='$1 != 0'
     fi
-    awk "$cond"'{ printf("%s %.20f\n", $2, $3 / 1.5 ** (30 - $2)) }'
+    awk "$cond"'{ printf("%s %.20f\n", $2, $3 / 1.5 ^ (30 - $2)) }'
 }
 
 input_file=${1?}

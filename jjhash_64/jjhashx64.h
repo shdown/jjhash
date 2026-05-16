@@ -155,7 +155,7 @@ static JJHASHX64_ATTRS_SMALL uint64_t jjhashx64_s(const char *s)
 // The intended use is as follows:
 //
 // Calculate hash state of concatenation of "prefix" (s ... s+na) with "suffix" (s+na ... s+ntotal).
-// state_a is hash sate of the "prefix" (s ... s+na).
+// state_a is hash state of the "prefix" (s ... s+na).
 //
 // struct JJHASHX64_state hash_state_of_concat_b(const char *s, size_t na, struct JJHASHX64_state state_a, size_t ntotal)
 // {
