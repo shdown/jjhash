@@ -19,11 +19,11 @@ We test on the [corpus](http://shdown.github.io/stuff/jjhash/check_quality_corpu
 To prevent “overfitting”, we chose `JJ_PRIME` from a large set of prime numbers based on the performance on a smaller dictionary of 27k words;
 this evaluation is thus a “validation”.
 
-For each `i=1...30`, we downsample the corpus to `min(2^i, W)` words (i.e. choose a random subset of this size) and
-map these words into `2^i` buckets with the hash function.
+For each `i=1...30`, we downsample the corpus to `min(2**i, W)` words (i.e. choose a random subset of this size) and
+map these words into `2**i` buckets with the hash function.
 We then calculate the χ² statistic using the LaTeX formula above.
 
-For illustrative purposes, we then take base-2 logarithm of the result and then divide it by `1.5^(30-i)`.
+For illustrative purposes, we then take base-2 logarithm of the result and then divide it by `1.5**(30-i)`.
 
 # Results
 
