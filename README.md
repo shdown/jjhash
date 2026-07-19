@@ -33,8 +33,13 @@ return a & MASK;
 where:
   * `JJ_OFFSET` is 0x100000000;
   * `JJ_PRIME` is 2752750471;
-  * `HASH_TYPE` is `uint32_t` for 32-bit hash version and `uint64_t` for 64-bit hash version;
-  * `MASK` is `UINT32_MAX` (0xFFFFFFFF)  for 32-bit hash version and `UINT64_MAX` (0xFFFFFFFFFFFFFFFF) for 64-bit hash version.
+  * `MASK` is `UINT32_MAX` (0xFFFFFFFF) for 32-bit hash version and `UINT64_MAX` (0xFFFFFFFFFFFFFFFF) for 64-bit hash version.
+
+## Why these constants?
+
+For `JJ_OFFSET`, anything greater than `0xFFFFFFFF` would do, apparently.
+
+For `JJ_PRIME`, all primes less than 2**33 have been evaluated, and a lot of 64-bit ones.
 
 # Validation
 
@@ -54,7 +59,7 @@ then measure the time it takes to hash all the generated words `N` times,
 where `N = floor(15000000 / L)`.
 
 We perform this measurement:
-  1. for various `L`s: namely, of form `L = round_up_4(floor(1.6 ^ i))` for `i=3...23`, where `round_up_4(n) = n + (4 - n % 4) % 4` rounds up its argument to a multiple of 4;
+  1. for various `L`s: namely, of form `L = round_up_4(floor(1.6 ** i))` for `i=3...23`, where `round_up_4(n) = n + (4 - n % 4) % 4` rounds up its argument to a multiple of 4;
   2. for both jjhash and FNV-2;
   3. for both hashing a null-terminated string and for hashing a pointer-and-length string.
 
@@ -89,11 +94,11 @@ We test on the [corpus](http://shdown.github.io/stuff/jjhash/check_quality_corpu
 To prevent “overfitting”, we chose `JJ_PRIME` from a large set of prime numbers based on the performance on a smaller dictionary of 27k words;
 this evaluation is thus a “validation”.
 
-For each `i=1...30`, we downsample the corpus to `min(2^i, W)` words (i.e. choose a random subset of this size) and
-map these words into `2^i` buckets with the hash function.
+For each `i=1...30`, we downsample the corpus to `min(2**i, W)` words (i.e. choose a random subset of this size) and
+map these words into `2**i` buckets with the hash function.
 We then calculate the χ² statistic using the LaTeX formula above.
 
-For illustrative purposes, we then take base-2 logarithm of the result and then divide it by `1.5^(30-i)`.
+For illustrative purposes, we then take base-2 logarithm of the result and then divide it by `1.5**(30-i)`.
 
 ## Results
 
